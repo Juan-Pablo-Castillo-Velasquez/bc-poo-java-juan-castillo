@@ -3,15 +3,13 @@
 # -----------------------------
 # CONFIGURACIÓN
 # -----------------------------
-REPO_DIR="$(dirname "$0")/.."      # raíz del repositorio
+REPO_DIR="$(dirname "$0")/.."
 LOG_FILE="$REPO_DIR/logs/autocommit.log"
-BRANCH="main"                      # rama a la que hace push
+BRANCH="main"
 GIT_USER="Juan Pablo Castillo Velasquez"
 GIT_EMAIL="juanpablo207k@gmail.com"
 
-# -----------------------------
-# PREPARACIÓN
-# -----------------------------
+
 mkdir -p "$REPO_DIR/logs"
 cd "$REPO_DIR" || exit
 
@@ -26,9 +24,6 @@ log() {
 
 log "=== Iniciando auto-commit ==="
 
-# -----------------------------
-# AUTO-COMMIT
-# -----------------------------
 # Verifica cambios
 CHANGES=$(git status --porcelain)
 
@@ -59,7 +54,6 @@ Impact? $IMPACT
 
 🤖 Auto-committed by script"
 
-    # Hacer commit
     if git commit -m "$COMMIT_MSG"; then
         log "✅ Commit realizado: $SUMMARY"
 
