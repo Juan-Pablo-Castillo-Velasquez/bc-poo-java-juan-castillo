@@ -1,0 +1,39 @@
+## 🔧 Archivo .gitignore
+
+**Ubicación:** Raíz del repositorio
+
+**Contenido obligatorio:**
+
+```gitignore
+# Compiled class files
+*.class
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# IDE specific files
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Build directories
+out/
+target/
+build/
+bin/
+
+# Logs
+*.log
