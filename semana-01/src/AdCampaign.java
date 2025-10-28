@@ -12,23 +12,40 @@ public class AdCampaign {
         this.durationDays = durationDays;
         this.active = true;
     }
-
-    public void showInfo() {
-        System.out.println("=== CAMPAÑA PUBLICITARIA ===");
-        System.out.println("Código: " + campaignCode);
-        System.out.println("Cliente: " + clientName);
-        System.out.println("Presupuesto: $" + budget);
-        System.out.println("Duración: " + durationDays + " días");
-        System.out.println("Estado: " + (active ? "ACTIVA" : "INACTIVA"));
+    public boolean getActive() {
+        return active;
     }
 
-    public double calculateDailyCost() {
-        return budget / durationDays;
+    public double getBudget() {
+        return budget;
+    }
+
+    public String getCampaignCode() {
+        return campaignCode;
+    }
+
+
+    public int getDurationDays() {
+        return durationDays;
     }
 
     public String getClientName() {
         return clientName;
     }
+
+    public void showInfo() {
+        System.out.println("=== CAMPAÑA PUBLICITARIA ===");
+        System.out.println("Código: " + getCampaignCode());
+        System.out.println("Cliente: " + getClientName());
+        System.out.println("Presupuesto: $" + getBudget());
+        System.out.println("Duración: " + getDurationDays() + " días");
+        System.out.println("Estado: " + (getActive() ? "ACTIVA" : "INACTIVA"));
+    }
+
+    public double calculateDailyCost() {
+        return getBudget() / getDurationDays();
+    }
+
 
     public void setActive(boolean active) {
         this.active = active;

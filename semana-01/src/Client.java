@@ -12,6 +12,9 @@ public class Client {
         this.premium = premium;
         this.campaignsCount = 0;
     }
+    public boolean getPremium() {
+        return premium;
+    }
 
     public String getName() {
         return name;
@@ -31,11 +34,11 @@ public class Client {
 
     public void showInfo() {
         System.out.println("=== CLIENTE ===");
-        System.out.println("ID: " + clientId);
-        System.out.println("Nombre: " + name);
-        System.out.println("Industria: " + industry);
-        System.out.println("Tipo: " + (premium ? "PREMIUM" : "ESTÁNDAR"));
-        System.out.println("Campañas activas: " + campaignsCount);
+        System.out.println("ID: " + getClientId());
+        System.out.println("Nombre: " + getName());
+        System.out.println("Industria: " + getIndustry());
+        System.out.println("Tipo: " + (getPremium() ? "PREMIUM" : "ESTÁNDAR"));
+        System.out.println("Campañas activas: " + getCampaignsCount());
     }
 
     public void addCampaign() {

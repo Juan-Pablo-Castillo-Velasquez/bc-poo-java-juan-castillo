@@ -12,14 +12,57 @@
 - **Relación con objeto principal:** Asociación 1 a muchos - Un cliente puede tener múltiples campañas. Se vinculan mediante clientName.
 
 ## 2. Diagrama de Clases
+```mermaid 
+classDiagram
+    %% ======== CLASE CLIENT ========
+    class Client {
+        -String clientId
+        -String name
+        -String industry
+        -boolean premium
+        -int campaignsCount
+
+        +Client(String clientId, String name, String industry, boolean premium)
+        +boolean getPremium()
+        +String getName()
+        +String getClientId()
+        +int getCampaignsCount()
+        +String getIndustry()
+        +void showInfo()
+        +void addCampaign()
+        +boolean isPremium()
+    }
+
+    %% ======== CLASE ADCAMPAIGN ========
+    class AdCampaign {
+        -String campaignCode
+        -String clientName
+        -double budget
+        -boolean active
+        -int durationDays
+
+        +AdCampaign(String campaignCode, String clientName, double budget, int durationDays)
+        +boolean getActive()
+        +double getBudget()
+        +String getCampaignCode()
+        +int getDurationDays()
+        +String getClientName()
+        +void showInfo()
+        +double calculateDailyCost()
+        +void setActive(boolean active)
+    }
+
+    %% ======== CLASE MAIN ========
+    class Main {
+        +void main(String[] args)
+    }
+
+    %% ======== RELACIONES ========
+    Client "1" --> "*" AdCampaign : tiene >
+    Main --> Client : usa >
+    Main --> AdCampaign : usa >
 ```
-Client (1) ----< tiene >---- (*) AdCampaign
-  - clientId                    - campaignCode
-  - name                        - clientName
-  - industry                    - budget
-  - premium                     - durationDays
-  - campaignsCount              - active
-```
+
 
 ## 3. Decisiones de Diseño
 
