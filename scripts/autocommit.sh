@@ -1,8 +1,3 @@
-#!/bin/bash
-
-# -----------------------------
-# CONFIGURACIÓN
-# -----------------------------
 REPO_DIR="$(dirname "$0")/.."
 LOG_FILE="$REPO_DIR/logs/autocommit.log"
 BRANCH="main"
@@ -13,18 +8,15 @@ GIT_EMAIL="juanpablo207k@gmail.com"
 mkdir -p "$REPO_DIR/logs"
 cd "$REPO_DIR" || exit
 
-# Configurar git si no está configurado
 git config user.name "$GIT_USER"
 git config user.email "$GIT_EMAIL"
 
-# Función para log con fecha y hora
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"
 }
 
 log "=== Iniciando auto-commit ==="
 
-# Verifica cambios
 CHANGES=$(git status --porcelain)
 
 if [ -z "$CHANGES" ]; then
@@ -32,7 +24,6 @@ if [ -z "$CHANGES" ]; then
 else
     git add -A
 
-    # Analizar tipo de cambio
     ADDED=$(echo "$CHANGES" | grep '^A' | wc -l)
     MODIFIED=$(echo "$CHANGES" | grep '^ M' | wc -l)
     DELETED=$(echo "$CHANGES" | grep '^ D' | wc -l)
@@ -57,7 +48,6 @@ Impact? $IMPACT
     if git commit -m "$COMMIT_MSG"; then
         log "✅ Commit realizado: $SUMMARY"
 
-        # Push al repositorio remoto
         if git push origin "$BRANCH" 2>&1 | tee -a "$LOG_FILE"; then
             log "✅ Push exitoso 👍"
         else

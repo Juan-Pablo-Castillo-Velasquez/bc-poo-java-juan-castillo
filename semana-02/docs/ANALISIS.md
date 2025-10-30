@@ -1,4 +1,4 @@
-# Análisis del Dominio: Agencia de Publicidad
+# Análisis del Dominio: Agencia de Publicidad 
 
 ## 1. Identificación de Objetos
 

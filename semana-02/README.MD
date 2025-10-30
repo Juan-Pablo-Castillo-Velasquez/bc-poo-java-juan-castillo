@@ -1,4 +1,4 @@
-# Semana 02 - Gestión de Campañas Publicitarias
+# Semana 02 - Gestión de Campañas Publicitarias 
 
 ## 📝 Descripción
 
