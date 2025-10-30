@@ -1,10 +1,10 @@
-# Bootcamp POO Java - [Tu Nombre Completo]
+# Bootcamp POO Java - Juan Pablo Castillo Velasquez
 
 ## 📋 Información
 
 - **Estudiante:** Juan Pablo Castillo Velasquez
 - **Ficha:** 3228970A
-- **Dominio Asignado:** https://github.com/Juan-Pablo-Castillo-Velasquez/bc-poo-java-juan-castillo
+- **Dominio Asignado:** https://github.com/Juan-Pablo-Castillo-Velasquez/bc-poo-java-juan-castillo/blob/main/ContextoDominio/JUAN_PABLO_CASTILLO_VELASQUEZ.md
 - **Instructor:** Erick Granados Torres
 
 ## 📁 Estructura del Repositorio
