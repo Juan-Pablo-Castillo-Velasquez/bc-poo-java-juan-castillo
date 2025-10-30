@@ -43,7 +43,7 @@ What? $WHAT
 For? $FOR
 Impact? $IMPACT
 
-🤖 Auto-committed by script"
+ Auto-committed by script"
 
     if git commit -m "$COMMIT_MSG"; then
         log "✅ Commit realizado: $SUMMARY"
