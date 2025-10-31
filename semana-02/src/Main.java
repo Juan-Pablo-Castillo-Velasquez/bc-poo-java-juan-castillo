@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static ArrayList<Client> clients = new ArrayList<>();
-    public static ArrayList<AdCampaign> campaigns = new ArrayList<>();
-    public static ArrayList<Employee> employees = new ArrayList<>();
+    public static final ArrayList<Client> CLIENTS = new ArrayList<>();
+    public static final ArrayList<AdCampaign> CAMPAIGNS = new ArrayList<>();
+    public static final ArrayList<Employee> EMPLOYEES = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -27,27 +27,41 @@ public class Main {
 
 
         for (Client cl : cliente) {
-            clients.add(cl);//add new clientts to List 
+            CLIENTS.add(cl);//add new clientts to List
         }
 
         for (AdCampaign addCampaign : campaignsData) {
-            campaigns.add(addCampaign);//add new campaingns to List
+            CAMPAIGNS.add(addCampaign);//add new campaingns to List
         }
 
         for (Employee addEmployes : EmployesData) {
-            employees.add(addEmployes);//add new employees to List
+            EMPLOYEES.add(addEmployes);//add new employees to List
         }
+
+
         Scanner reader = new Scanner(System.in);
+        boolean continueProgram = true;
 
         try {
-            System.out.println("===== Insert your option into  the menu =====");
-            System.out.println("1. View clients");
-            System.out.println("2. View campaigns");
-            System.out.println("3. View employees");
-            System.out.print("Please enter your choice: ");
 
-            int options = reader.nextInt();
-            ValidateOption(options);
+            while (continueProgram) {
+                System.out.println("===== Insert your option into  the menu =====");
+                System.out.println("1. View CLIENTS");
+                System.out.println("2. View campaigns");
+                System.out.println("3. View employees");
+                System.out.print("Please enter your choice: ");
+                int options = reader.nextInt();
+                ValidateOption(options);
+                if (continueProgram) {
+                    System.out.print("Do you want to continue? (yes/no): ");
+                    String OptionBucle = reader.next().toLowerCase();
+                    if (OptionBucle.equals("no") || OptionBucle.equals("n")) {
+                        continueProgram = false;
+
+                    }
+                }
+
+            }
 
         } catch (Exception e) {
             System.out.println(" you must enter a numeric value");
@@ -62,7 +76,7 @@ public class Main {
             switch (options) {
                 case 1:
                     System.out.println("your choice is " + options);
-                    for (Client ShowClient : clients) {
+                    for (Client ShowClient : CLIENTS) {
                         ShowClient.addCampaign();
                         ShowClient.showInfo();
 
@@ -71,14 +85,14 @@ public class Main {
 
                 case 2:
                     System.out.println("your choice is " + options);
-                    for (Employee ShoWEmployees : employees) {
+                    for (Employee ShoWEmployees : EMPLOYEES) {
                         ShoWEmployees.showInfo(); //this section can show you  information about employees
                     }
                     break;
 
                 case 3:
                     System.out.println("your choice is " + options);
-                    for (AdCampaign ShowCampaigns : campaigns) {
+                    for (AdCampaign ShowCampaigns : CAMPAIGNS) {
                         ShowCampaigns.showInfo(); // here  you can put showinfo about campaings and daily cost
                         System.out.println("daily cots: " + ShowCampaigns.calculateDailyCost() + "$");
                     }
