@@ -1,49 +1,73 @@
-# Análisis del Dominio: Agencia de Publicidad 
+# Análisis del Dominio: Agencia de Publicidad (versión actualizada)
 
 ## 1. Identificación de Objetos
 
 ### Objeto Principal: `AdCampaign`
-- **Justificación:** Representa cada campaña publicitaria que se gestiona para los clientes. Es el núcleo del sistema porque toda la información de presupuesto, duración y estado se relaciona directamente con este objeto.
-- **Atributos identificados:** 
+
+- **Justificación:**  
+  Representa cada campaña publicitaria que gestiona la agencia.  
+  Es el eje central del sistema, ya que toda la información de clientes, presupuestos y duración se relaciona con este objeto.
+
+- **Atributos identificados:**
   - `campaignCode` → código identificador único de la campaña
   - `clientName` → nombre del cliente asociado
   - `budget` → presupuesto total de la campaña
   - `active` → estado de la campaña (activa o inactiva)
   - `durationDays` → duración de la campaña en días
-- **Comportamientos:**  
-  - `showInfo()` → Muestra la información completa de la campaña
-  - `calculateDailyCost()` → Calcula el costo diario de la campaña
-  - `setActive(boolean)` → Cambia el estado de la campaña
+
+- **Comportamientos:**
+  - `showInfo()` → muestra toda la información de la campaña
+  - `calculateDailyCost()` → calcula el costo diario de la campaña
+  - `setActive(boolean)` → cambia el estado de la campaña
+
+---
 
 ### Objeto Secundario: `Client`
-- **Justificación:** Representa a los clientes que contratan campañas publicitarias. Sin clientes no existen campañas.
-- **Relación con objeto principal:** Un cliente puede tener varias campañas (`1:N`).
+
+- **Justificación:**  
+  Representa a los clientes de la agencia que contratan campañas.  
+  Sin clientes no existirían campañas.
+
+- **Relación con el objeto principal:**  
+  Un cliente puede tener varias campañas (`1:N`).
+
 - **Atributos identificados:**
   - `clientId` → identificador único del cliente
   - `name` → nombre del cliente
-  - `industry` → sector al que pertenece
+  - `industry` → sector de la empresa
   - `premium` → indica si es cliente premium
-  - `campaignsCount` → cantidad de campañas activas asociadas
-- **Comportamientos:**  
-  - `showInfo()` → Muestra la información del cliente
-  - `addCampaign()` → Incrementa el contador de campañas
+  - `campaignsCount` → cantidad de campañas asociadas
+
+- **Comportamientos:**
+  - `showInfo()` → muestra la información del cliente
+  - `addCampaign()` → incrementa el contador de campañas
+
+---
 
 ### Objeto Secundario: `Employee`
-- **Justificación:** Representa a los empleados que gestionan campañas o realizan tareas relacionadas.
-- **Relación con objeto principal:** Aunque no está explícitamente en el código, conceptualmente un empleado puede estar asignado a varias campañas (`0:N`).
+
+- **Justificación:**  
+  Representa a los empleados de la agencia que gestionan o supervisan campañas publicitarias.
+
+- **Relación con el objeto principal:**  
+  Aunque no se implementa explícitamente, un empleado puede estar asignado a múltiples campañas (`0:N`).
+
 - **Atributos identificados:**
   - `employeeId` → identificador único del empleado
   - `name` → nombre del empleado
   - `role` → cargo o función dentro de la empresa
   - `salary` → salario del empleado
-  - `available` → indica si el empleado está disponible para nuevas tareas
+  - `available` → indica si el empleado está disponible
+
 - **Comportamientos:**
-  - `showInfo()` → Muestra la información del empleado
-  - `isAvailable()` → Devuelve si el empleado está disponible
+  - `showInfo()` → muestra la información del empleado
+  - `isAvailable()` → devuelve si está disponible
 
-## 2. Diagrama de Clases (opcional)
+---
 
-```mermaid
+## 2. Diagrama de Clases
+
+```mermaid 
 classDiagram
     class Client {
         - String clientId
@@ -52,12 +76,6 @@ classDiagram
         - boolean premium
         - int campaignsCount
         + Client(String, String, String, boolean)
-        + String getClientId()
-        + String getName()
-        + String getIndustry()
-        + boolean getPremium()
-        + boolean isPremium()
-        + int getCampaignsCount()
         + void showInfo()
         + void addCampaign()
     }
@@ -69,14 +87,9 @@ classDiagram
         - boolean active
         - int durationDays
         + AdCampaign(String, String, double, int)
-        + String getCampaignCode()
-        + String getClientName()
-        + double getBudget()
-        + boolean getActive()
-        + int getDurationDays()
-        + void setActive(boolean)
         + void showInfo()
         + double calculateDailyCost()
+        + void setActive(boolean)
     }
 
     class Employee {
@@ -86,34 +99,35 @@ classDiagram
         - double salary
         - boolean available
         + Employee(String, String, String, double, boolean)
-        + String getEmployeeId()
-        + String getName()
-        + String getRole()
-        + double getSalary()
-        + boolean isAvailable()
         + void showInfo()
+        + boolean isAvailable()
     }
 
     Client "1" --> "*" AdCampaign : owns
+
 ```
+---
 ## 3. Decisiones de Diseño
-- **¿Por qué elegí estos atributos?**
-  - Los atributos elegidos representan la información esencial para gestionar campañas publicitarias, clientes y empleados.
-  - En `AdCampaign` se incluyeron presupuesto, duración y estado para calcular costos diarios y controlar la actividad.
-  - En `Client` se incluyen identificación, tipo de cliente y contador de campañas para gestionar relaciones.
-  - En `Employee` se incluyen rol, salario y disponibilidad para poder asignar tareas de manera efectiva.
 
-- **¿Qué validaciones implementé?**
-  - Se controla que los métodos de `AdCampaign` calculen correctamente el costo diario (`calculateDailyCost()`).
-  - Se verifica la disponibilidad de los empleados mediante `isAvailable()`.
-  - Se mantiene un contador de campañas en `Client` para asegurar consistencia.
+**¿Por qué elegí estos atributos?**  
+Los atributos representan la información esencial para administrar campañas, clientes y empleados.  
+Se priorizó mantener el modelo simple pero funcional, centrado en los datos necesarios para el flujo del sistema.
 
-- **¿Qué relaciones identifiqué?**
-  - Un `Client` puede tener varias `AdCampaign` (relación 1:N).
-  - Conceptualmente, un `Employee` podría estar asignado a múltiples campañas (0:N), aunque no está implementado explícitamente.
+**Validaciones implementadas:**  
+- `AdCampaign` calcula el costo diario correctamente mediante `calculateDailyCost()`.  
+- `Client` mantiene un contador de campañas coherente con `addCampaign()`.  
+- `Employee` puede verificar su disponibilidad con `isAvailable()`.  
 
+**Relaciones identificadas:**  
+- Un `Client` puede tener múltiples `AdCampaign` (relación `1:N`).  
+- Un `Employee` puede estar vinculado a múltiples campañas (relación conceptual `0:N`).  
+
+
+---
 ## 4. Dificultades Encontradas
-- Gestionar la relación entre `Employee` y `AdCampaign` sin sobrecomplicar la implementación inicial.
-- Decidir qué información es esencial para mostrar en los métodos `showInfo()` sin sobrecargar la interfaz.
-- Asegurar que el contador de campañas en `Client` se mantenga consistente cuando se agregan nuevas campañas.
-- Manejar la protección de datos sensibles (como salarios y presupuestos) al generar logs o mostrar información.
+
+- Manejar la relación entre empleados y campañas sin aumentar la complejidad inicial.  
+- Decidir qué información debía mostrarse en `showInfo()` para cada clase.  
+- Mantener la consistencia entre las listas dinámicas (`ArrayList`) y los objetos creados.  
+- Evitar la duplicación de datos entre arreglos y listas (ya solucionado en la versión actual).  
+- Controlar excepciones de entrada del usuario al seleccionar opciones del menú.
