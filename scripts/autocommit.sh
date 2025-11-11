@@ -1,6 +1,6 @@
 REPO_DIR="$(dirname "$0")/.."
 LOG_FILE="$REPO_DIR/logs/autocommit.log"
-BRANCH="main"
+BRANCH="feature"
 GIT_USER="Juan Pablo Castillo Velasquez"
 GIT_EMAIL="juanpablo207k@gmail.com"
 
