@@ -7,8 +7,8 @@ public class Main {
     public static final ArrayList<Employee> EMPLOYEES = new ArrayList<>();
 
     public static void main(String[] args) {
-
-
+                                                    
+                      
         Client[] cliente = {new Client("CL001", "TechCorp", "Tecnología", true),
                 new Client("CL002", "Fashion Boutique", "Moda", false),
                 new Client("CL003", "Gourmet Express", "Restaurantes", false)
