@@ -32,6 +32,14 @@ public class Client {
         return industry;
     }
 
+
+
+
+
+
+
+
+
     public void showInfo() {
         System.out.println("=== CLIENTE ===");
         System.out.println("ID: " + getClientId());
