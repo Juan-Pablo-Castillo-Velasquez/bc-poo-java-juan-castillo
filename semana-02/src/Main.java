@@ -79,7 +79,6 @@ public class Main {
                     for (Client ShowClient : CLIENTS) {
                         ShowClient.addCampaign();
                         ShowClient.showInfo();
-
                     }
                     break;
 
