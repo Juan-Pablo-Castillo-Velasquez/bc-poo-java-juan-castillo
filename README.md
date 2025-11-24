@@ -13,6 +13,8 @@
 - `semana-02/`: Clases y Objetos
 - `semana-03/`: Encapsulación y Constructores
 - `semana-04/`: Herencia
+- `semana-05/`: Sobrecarga, Sobrescritura y Polimorfismo
+- `semana-06/`: Abstracción e Interfaces
 
 ## 🚀 Cómo Ejecutar
 
