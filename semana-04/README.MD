@@ -1,6 +1,6 @@
 # 🧩 Semana 04 – Herencia y Polimorfismo
 ## 📘 Sistema de Gestión de Campañas Publicitarias
-
+dominio inverso arreglar
 Este proyecto implementa una **jerarquía de herencia** para modelar diferentes tipos de campañas publicitarias en una agencia de marketing digital. Se aplican conceptos de **POO**, como herencia, especialización, métodos sobrescritos, `super()`, polimorfismo y uso de `ArrayList` polimórfico.
 
 ---

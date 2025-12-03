@@ -15,7 +15,8 @@
 - `semana-04/`: Herencia
 - `semana-05/`: Sobrecarga, Sobrescritura y Polimorfismo
 - `semana-06/`: Abstracción e Interfaces
-
+- `semana-07/`: Excepciones Personalizadas y Validaciones
+- `semana-08/`: Estructuras de Datos en Java
 ## 🚀 Cómo Ejecutar
 
 ### Semana 01
