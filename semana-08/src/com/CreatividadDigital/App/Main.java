@@ -14,20 +14,7 @@ import java.util.Iterator;
 import java.util.InputMismatchException;
 import java.util.ArrayList;
 
-/*
- * Main.java
- * Menú para manejar Inventory, ContactBook, ProductSet y mostrar ejemplos de iteradores.
- *
- * Asegúrate de tener las clases:
- * - Product
- * - Inventory
- * - Contact
- * - ContactBook
- * - ProductSetItem
- * - ProductSet
- *
- * en el mismo paquete o en rutas accesibles para compilar.
- */
+
 public class Main {
 
     private static Inventory inventory = new Inventory();
