@@ -1,12 +1,14 @@
 package com.CreatividadDigital.Modelo;
 
 
+
+
 public abstract class Persona {
-    private String id;
+
+    private final String id;
     private String nombre;
     private String email;
 
-    // Constructor base
     public Persona(String id, String nombre, String email) {
         this.id = id;
         this.nombre = nombre;
@@ -15,7 +17,6 @@ public abstract class Persona {
 
     public abstract void mostrarRol();
 
-    // Método común
     public void saludar() {
         System.out.println("Hola, mi nombre es " + nombre + ".");
     }

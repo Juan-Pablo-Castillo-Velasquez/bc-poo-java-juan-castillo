@@ -2,46 +2,47 @@
 
 ## 📘 Sistema Integral de Gestión: Agencia de Publicidad "Creativa Digital"
 
-Este proyecto implementa un sistema modular que demuestra la aplicación integral de la Programación Orientada a Objetos (POO) en Java, cumpliendo con todos los criterios de la Rúbrica de Evaluación de la Semana 09.
+Este proyecto implementa un sistema modular que demuestra la **aplicación integral de la Programación Orientada a Objetos (POO)** en Java, cumpliendo con todos los criterios de la rúbrica de evaluación de la Semana 09.
 
-### 🎯 Objetivos de la Semana 09 (Proyecto Final)
+---
 
-* Diseñar una arquitectura con **5+ Clases del Dominio** que incluya **Herencia** y **Abstracción**.
-* Aplicar los cuatro pilares de POO: **Encapsulación, Herencia, Polimorfismo y Abstracción**.
-* Utilizar **Colecciones Genéricas** (`ArrayList` y `HashMap`) para la gestión de datos.
-* Implementar **Excepciones Personalizadas** del dominio con manejo `try-catch`.
-* Desarrollar un **Sistema Funcional** con menú interactivo y operaciones CRUD.
+# 🎯 Objetivos de la Semana 09 (Proyecto Final)
 
------
+* Diseñar una arquitectura con **5+ Clases del Dominio**, incluyendo **Herencia** y **Abstracción**.
+* Aplicar los pilares de POO: **Encapsulación, Herencia, Polimorfismo y Abstracción**.
+* Utilizar **Colecciones Genéricas** (`ArrayList`, `HashMap`) para el manejo de datos.
+* Implementar **Excepciones Personalizadas** del dominio.
+* Crear un **Sistema CRUD funcional** con un menú interactivo.
+* Manejar errores mediante `try-catch` y validaciones lógicas.
 
-## 📂 Archivos Entregados (Semana 09)
+---
 
-La estructura del proyecto está organizada en cuatro paquetes principales, siguiendo las mejores prácticas de modularidad.
+# 📂 Archivos Entregados (Semana 09)
+
+La estructura final del proyecto quedó organizada en cuatro paquetes principales:
 
 ```
 src/
  ├── com.CreatividadDigital/
- │     ├── App/                      // CLASE PRINCIPAL (Menú)
- │     │     └── Main.java
- │     ├── excepciones/              // Requisito: Excepciones Personalizadas
+ │     ├── App/
+ │     │     └── Main.java                   // MENÚ PRINCIPAL (6 opciones)
+ │     ├── excepciones/
  │     │     ├── CampanaNoEncontradaException.java
  │     │     └── PresupuestoInvalidoException.java
- │     ├── Modelo/                   // Requisito: 5+ Clases del Dominio
- │     │     ├── Persona.java          // CLASE ABSTRACTA (Padre)
- │     │     ├── Cliente.java          // HIJO 1
- │     │     ├── Empleado.java         // HIJO 2
- │     │     ├── Servicio.java         // INTERFACE
- │     │     ├── CampanaPublicitaria.java  // Implementa Servicio
- │     │     └── DisenoGrafico.java    // Implementa Servicio
- │     └── Servicio/                 // Requisito: Lógica de Negocio/CRUD
- │           └── GestionAgencia.java   // Colecciones y Métodos CRUD
+ │     ├── Modelo/
+ │     │     ├── Persona.java                // Clase ABSTRACTA
+ │     │     ├── Cliente.java                // Hijo 1
+ │     │     ├── Empleado.java               // Hijo 2
+ │     │     ├── Servicio.java               // Interface
+ │     │     ├── CampanaPublicitaria.java    // Implementa Servicio
+ │     │     └── DisenoGrafico.java          // Implementa Servicio
+ │     └── Servicio/
+ │           └── GestionAgencia.java         // CRUD + Colecciones
 ```
 
------
+---
 
-## 📐 Diagrama UML General
-
-Este diagrama muestra la estructura de clases, las relaciones de herencia y abstracción, y las principales asociaciones con la clase de gestión.
+# 📐 Diagrama UML General
 
 ```mermaid
 classDiagram
@@ -50,20 +51,25 @@ classDiagram
     class GestionAgencia {
         -Map~String, Cliente~ clientes
         -List~Persona~ nomina
+        -Map~String, CampanaPublicitaria~ campañasActivas
         +agregarCliente(Cliente)
         +listarNominaCompleta()
-        +modificarPresupuesto(String, double)
+        +buscarCampanaPorCodigo(String)
+        +modificarPresupuestoCampana(String,double)
+        +eliminarCampana(String)
     }
     
     abstract class Persona {
         -String id
         -String nombre
+        -String email
         +saludar()
         +abstract mostrarRol()
     }
     
     class Cliente {
         -String empresa
+        -String tipoCliente
         +mostrarRol()
         +toString()
     }
@@ -72,6 +78,7 @@ classDiagram
         -String puesto
         -double salario
         +mostrarRol()
+        +calcularBono()
         +calcularBono(double)
     }
     
@@ -82,82 +89,135 @@ classDiagram
     
     class CampanaPublicitaria {
         -String codigo
+        -String nombre
         -double presupuesto
         -Cliente clienteAsignado
         +calcularCostoTotal()
+        +ejecutarServicio()
         +setPresupuesto(double)
     }
 
     class DisenoGrafico {
         -String codigo
+        -String tipoDiseno
+        -double tarifaPorHora
         -int horasDedicadas
         +calcularCostoTotal()
+        +ejecutarServicio()
     }
 
-    Persona <|-- Cliente : Herencia
-    Persona <|-- Empleado : Herencia
-    Servicio <|.. CampanaPublicitaria : Implementación
-    Servicio <|.. DisenoGrafico : Implementación
+    Persona <|-- Cliente
+    Persona <|-- Empleado
+    Servicio <|.. CampanaPublicitaria
+    Servicio <|.. DisenoGrafico
     
-    GestionAgencia "1" --> "*" Persona : Colección (Polimorfismo)
-    GestionAgencia "1" --> "*" CampanaPublicitaria : Colección
-    CampanaPublicitaria "1" --> "1" Cliente : Asociación
+    GestionAgencia --> Persona : * nomina
+    GestionAgencia --> CampanaPublicitaria : * campañasActivas
+    CampanaPublicitaria --> Cliente : clienteAsignado
 ```
 
------
+---
 
-## 🏛️ Descripción de la Aplicación Integral de POO
+# 🏛️ Descripción de la Aplicación Integral de POO
 
-### 🟦 1. Abstracción y Herencia (Jerarquía `Persona`)
+## 🟦 1. Abstracción y Herencia (Jerarquía `Persona`)
 
-* **Clase Abstracta (`Persona.java`):** Define los atributos comunes (`id`, `nombre`, `email`) y el contrato (`mostrarRol()`) que debe ser implementado por todas las personas de la agencia.
-* **Clases Concretas (`Cliente.java`, `Empleado.java`):** Extienden de `Persona` para heredar las características comunes y añaden atributos específicos (`empresa` o `salario`). Esto cumple la **Jerarquía de Herencia** (1 Padre + 2 Hijos).
-* **Interface (`Servicio.java`):** Define el contrato `calcularCostoTotal()`, asegurando que cualquier clase de producto o servicio (`CampañaPublicitaria`, `DiseñoGrafico`) ofrezca esta funcionalidad.
+* La clase **`Persona`** es **abstracta**, obliga a implementar `mostrarRol()` en sus subclases.
+* `Cliente` y `Empleado` son clases hijas que heredan atributos comunes y añaden características propias.
+* Se utiliza `super()` en sus constructores.
 
-### 🟩 2. Polimorfismo y Encapsulación
+Esto cumple la relación **Padre → Hijos** y demuestra **abstracción + herencia**.
 
-* **Polimorfismo por Sobrescritura:** La lista `List<Persona> nomina` almacena `Cliente` y `Empleado`. Al llamar al método `mostrarRol()` sobre cada elemento, se ejecuta el comportamiento específico de cada subclase.
-* **Polimorfismo por Sobrecarga:** La clase `Empleado` implementa el método `calcularBono()` con diferentes firmas (ej., sin parámetros o recibiendo un porcentaje).
-* **Encapsulación:** Todos los atributos en el paquete `Modelo` son `private`. Los métodos `set` (como `setPresupuesto`) incluyen **validaciones robustas** para prevenir entradas incorrectas (ej., valores negativos), reforzando la integridad del dato.
+---
 
-### 🟨 3. Colecciones y Excepciones
+## 🟩 2. Polimorfismo y Encapsulación
 
-* **Colección List:** `ArrayList<Persona>` (`nomina`) en `GestionAgencia.java` se utiliza para listar todos los individuos de la agencia, aplicando el Polimorfismo.
-* **Colección Map:** `HashMap<String, CampanaPublicitaria>` se utiliza en `GestionAgencia.java` para almacenar campañas con una clave única (`código`), permitiendo búsquedas rápidas (eficiencia **O(1)**).
-* **Excepciones Personalizadas:** Se crearon `CampanaNoEncontradaException` y `PresupuestoInvalidoException` para manejar errores específicos del negocio.
-* **Manejo `try-catch`:** Implementado en `GestionAgencia.java` y `Main.java` para capturar y notificar al usuario sobre las excepciones lanzadas (ej., al intentar modificar una campaña inexistente).
+### ✔ Polimorfismo por Sobrescritura
 
------
+`Cliente` y `Empleado` implementan su propia versión de `mostrarRol()`.
 
-## 🔄 Ejecución del Proyecto
+### ✔ Polimorfismo por Sobrecarga
 
-El proyecto se ejecuta a través de la clase `Main.java` que presenta un menú interactivo.
+`Empleado` implementa dos versiones de `calcularBono()`.
+
+### ✔ Encapsulación
+
+Todos los atributos de modelo son **privados**, con `get/set`.
+
+Además:
+`CampanaPublicitaria.setPresupuesto()` valida que el valor sea positivo.
+
+---
+
+## 🟨 3. Colecciones y Excepciones
+
+### ✔ Colecciones
+
+* `ArrayList<Persona>` → nomina polimórfica
+* `HashMap<String, Cliente>` → clientes por ID
+* `HashMap<String, CampanaPublicitaria>` → campañas por código
+
+### ✔ Excepciones Personalizadas
+
+* `CampanaNoEncontradaException`
+* `PresupuestoInvalidoException`
+
+### ✔ Manejo con `try-catch`
+
+Usado en:
+
+* `modificarPresupuestoCampana()`
+* operaciones del menú en `Main.java`
+
+---
+
+# 🍽️ Menú Final (6 Opciones CRUD)
+
+`java
+==== MENÚ PRINCIPAL ====
+1. Listar Nómina y Clientes (Polimorfismo)
+2. Agregar Nuevo Cliente (CREATE)
+3. Agregar Nueva Campaña Publicitaria (CREATE)
+4. Modificar Presupuesto de Campaña (UPDATE)
+5. Buscar Campaña por Código (READ)
+6. Eliminar Campaña (DELETE)
+0. Salir
+Seleccione una opción:
+``
+
+Todos los métodos están implementados en `Main.java` usando `GestionAgencia`.
+
+---
+
+# 🔄 Ejecución del Proyecto
 
 ```bash
-# PASO 1: Compilación (Genera los .class en la carpeta 'bin')
+# Compilar
 javac -d bin src/com/CreatividadDigital/**/*.java
 
-# PASO 2: Ejecución (Llamando a la clase principal por su nombre completo)
+# Ejecutar
 java -cp bin com.CreatividadDigital.App.Main
 ```
 
------
+---
 
-## 📌 Conceptos Aplicados (Rúbrica de Sustentación)
+# 📌 Conceptos Aplicados (Rúbrica)
 
-| Pilar de POO | Concepto Aplicado | Clase Demostrada |
-| :--- | :--- | :--- |
-| **Abstracción** | Clase Abstracta / Interface | `Persona.java` / `Servicio.java` |
-| **Encapsulación** | Atributos `private` y Validación en `setters` | Todas las clases de `Modelo` |
-| **Herencia** | Jerarquía (Padre/Hijo) y uso de `super()` | `Cliente.java` y `Empleado.java` |
-| **Polimorfismo** | Sobrescritura (`@Override`) en método `mostrarRol()` | `Cliente.java`, `Empleado.java` y `GestionAgencia.java` |
-| **Colecciones** | Uso de `List` y `Map` con tipado Genérico (`<T>`) | `GestionAgencia.java` |
-| **Manejo de Errores** | `throw` y `try-catch` | `GestionAgencia.java` y `Main.java` |
+| Pilar             | Descripción                            | Clase                    |
+| ----------------- | -------------------------------------- | ------------------------ |
+| **Abstracción**   | Clase abstracta y métodos obligatorios | `Persona`                |
+| **Herencia**      | Estructura padre/hijo                  | `Cliente`, `Empleado`    |
+| **Encapsulación** | Atributos privados + setters validados | Todas las clases         |
+| **Polimorfismo**  | Sobrescritura y sobrecarga             | `Cliente`, `Empleado`    |
+| **Colecciones**   | `ArrayList` + `HashMap` generics       | `GestionAgencia`         |
+| **Excepciones**   | Lanzadas y manejadas                   | `GestionAgencia`, `Main` |
+| **CRUD**          | 6 opciones del menú funcionando        | `Main`, `GestionAgencia` |
 
------
+---
 
-## 🧩 Conclusión
+# 🧩 Conclusión
 
-El Proyecto Final cumple con la aplicación integral de POO, utilizando la **Agencia Creativa Digital** como dominio para demostrar la eficiencia del código modular, el manejo adecuado de colecciones para operaciones CRUD, y la robustez del sistema mediante el manejo de excepciones personalizadas.
+Este proyecto integra correctamente **todos los pilares de la Programación Orientada a Objetos**, acompañados de un **sistema CRUD completo**, colecciones genéricas, excepciones personalizadas y un menú interactivo funcional.
 
+La agencia "Creativa Digital" sirve como dominio ideal para demostrar la modularidad y flexibilidad de una arquitectura basada en POO.
 
