@@ -65,7 +65,10 @@ Clase base que define la estructura común de todas las campañas publicitarias.
 Subclase que representa campañas publicitarias en medios digitales.
 
 **Herencia:**
+
 ```java
+import com.CreatividadDigital.domain.Campaign;
+
 public class DigitalCampaign extends Campaign
 ```
 
@@ -115,7 +118,10 @@ public void showInfo() {
 Subclase que representa campañas publicitarias en medios tradicionales.
 
 **Herencia:**
+
 ```java
+import com.CreatividadDigital.domain.Campaign;
+
 public class TraditionalCampaign extends Campaign
 ```
 
@@ -166,14 +172,29 @@ public void showInfo() {
 Programa de demostración que implementa polimorfismo y ArrayList.
 
 **ArrayList Polimórfico:**
+
 ```java
+import com.CreatividadDigital.domain.Campaign;
+import com.CreatividadDigital.domain.DigitalCampaign;
+import com.CreatividadDigital.domain.TraditionalCampaign;
+
 ArrayList<Campaign> campaigns = new ArrayList<Campaign>();
 
-campaigns.add(new DigitalCampaign("DCAMP-001", "TechCorp", 5000000, "Instagram", 50000));
-campaigns.add(new TraditionalCampaign("TCAMP-001", "GlobalBrand", 3000000, "Television", 30));
-campaigns.add(new DigitalCampaign("DCAMP-002", "FashionCo", 2500000, "Facebook", 75000));
-campaigns.add(new TraditionalCampaign("TCAMP-002", "AutomotiveCorp", 4000000, "Radio", 45));
-campaigns.add(new DigitalCampaign("DCAMP-003", "EcommercePro", 1800000, "TikTok", 100000));
+campaigns.
+
+add(new DigitalCampaign("DCAMP-001", "TechCorp",5000000,"Instagram",50000));
+        campaigns.
+
+add(new TraditionalCampaign("TCAMP-001", "GlobalBrand",3000000,"Television",30));
+        campaigns.
+
+add(new DigitalCampaign("DCAMP-002", "FashionCo",2500000,"Facebook",75000));
+        campaigns.
+
+add(new TraditionalCampaign("TCAMP-002", "AutomotiveCorp",4000000,"Radio",45));
+        campaigns.
+
+add(new DigitalCampaign("DCAMP-003", "EcommercePro",1800000,"TikTok",100000));
 ```
 
 **Operaciones con ArrayList:**
@@ -185,6 +206,10 @@ campaigns.add(new DigitalCampaign("DCAMP-003", "EcommercePro", 1800000, "TikTok"
 **Métodos Polimórficos:**
 
 ```java
+import com.CreatividadDigital.domain.Campaign;
+import com.CreatividadDigital.domain.DigitalCampaign;
+import com.CreatividadDigital.domain.TraditionalCampaign;
+
 public static double calculateTotalBudget(ArrayList<Campaign> campaigns) {
     double total = 0;
     for (Campaign campaign : campaigns) {
@@ -196,7 +221,7 @@ public static double calculateTotalBudget(ArrayList<Campaign> campaigns) {
 public static void listarCampanasPorTipo(ArrayList<Campaign> campaigns) {
     int digitalCount = 0;
     int traditionalCount = 0;
-    
+
     for (Campaign campaign : campaigns) {
         if (campaign instanceof DigitalCampaign) {
             digitalCount++;
@@ -204,7 +229,7 @@ public static void listarCampanasPorTipo(ArrayList<Campaign> campaigns) {
             traditionalCount++;
         }
     }
-    
+
     System.out.println("Campanas Digitales: " + digitalCount);
     System.out.println("Campanas Tradicionales: " + traditionalCount);
 }
@@ -259,9 +284,9 @@ public void showInfo() { ... }
 Verificación de tipos en tiempo de ejecución:
 
 ```java
-if (campaign instanceof DigitalCampaign) {
-    // Código específico para campañas digitales
-}
+import com.CreatividadDigital.domain.DigitalCampaign;if(campaign instanceof DigitalCampaign){
+        // Código específico para campañas digitales
+        }
 ```
 
 ---

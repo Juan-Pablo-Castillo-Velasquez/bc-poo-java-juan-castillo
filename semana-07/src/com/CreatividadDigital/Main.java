@@ -1,3 +1,4 @@
+package com.CreatividadDigital;
 
 import com.CreatividadDigital.Excepciones.FechaInvalidaException;
 import com.CreatividadDigital.Excepciones.PresupuestoInvalidoException;
@@ -5,8 +6,10 @@ import com.CreatividadDigital.Modelo.CampaniaPublicitaria;
 import com.CreatividadDigital.Servicio.ServicioCampania;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
+
     public static void main(String[] args) {
 
         ServicioCampania servicio = new ServicioCampania();
@@ -16,32 +19,30 @@ public class Main {
             CampaniaPublicitaria c1 = new CampaniaPublicitaria(
                     "CMP01", "Netflix", 5000, LocalDate.parse("2025-01-10"));
             servicio.crearCampania(c1);
-            System.out.println("✓ Campaña registrada correctamente.");
-        } catch (PresupuestoInvalidoException | FechaInvalidaException e) {
-            System.out.println("✗ Error: " + e.getMessage());
+            System.out.println("Campaña registrada correctamente.");
         } catch (Exception e) {
-            System.out.println("✗ Error inesperado: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
 
-        // Caso 2: Error por presupuesto bajo (200 < 1000)
+        // Caso 2: Error por presupuesto
         try {
             CampaniaPublicitaria c2 = new CampaniaPublicitaria(
                     "CMP02", "Coca-Cola", 200, LocalDate.parse("2025-02-15"));
             servicio.crearCampania(c2);
         } catch (PresupuestoInvalidoException e) {
-            System.out.println("✗ Error: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("✗ Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
+        } catch (FechaInvalidaException e) {
+            System.out.println(e.getMessage());
         }
 
-        // Caso 3: Registro exitoso
+        // Caso 3: Error por fecha (formato incorrecto)
         try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             CampaniaPublicitaria c3 = new CampaniaPublicitaria(
-                    "CMP03", "Pepsi", 3000, LocalDate.parse("2025-02-15"));
+                    "CMP03", "Pepsi", 3000, LocalDate.parse("15/02/2025", formatter));
             servicio.crearCampania(c3);
-            System.out.println("✓ Campaña registrada correctamente.");
         } catch (Exception e) {
-            System.out.println("✗ Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
 
         // Caso 4: Registro exitoso
@@ -49,13 +50,13 @@ public class Main {
             CampaniaPublicitaria c4 = new CampaniaPublicitaria(
                     "CMP04", "Adidas", 8000, LocalDate.parse("2025-03-20"));
             servicio.crearCampania(c4);
-            System.out.println("✓ Campaña registrada exitosamente.");
+            System.out.println("Campaña registrada exitosamente.");
         } catch (Exception e) {
-            System.out.println("✗ Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
 
         // Caso 5: Mostrar campañas
-        System.out.println("\n Listado de campañas registradas:");
+        System.out.println("\nListado de campañas registradas:");
         for (CampaniaPublicitaria c : servicio.listarCampanias()) {
             System.out.println(c);
         }
