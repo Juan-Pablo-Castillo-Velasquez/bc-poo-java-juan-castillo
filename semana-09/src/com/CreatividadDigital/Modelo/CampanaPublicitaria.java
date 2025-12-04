@@ -1,51 +1,49 @@
 package com.CreatividadDigital.Modelo;
 
 
+
+
 public class CampanaPublicitaria implements Servicio {
-    private String codigo;
+
+    private final String codigo;
     private String nombre;
     private double presupuesto;
-    private Cliente clienteAsignado; // Asociación
+    private Cliente clienteAsignado;
 
     public CampanaPublicitaria(String codigo, String nombre, double presupuesto, Cliente clienteAsignado) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.presupuesto = presupuesto;
+        setPresupuesto(presupuesto);
         this.clienteAsignado = clienteAsignado;
     }
 
-    // Implementación del método de la Interface
     @Override
     public double calcularCostoTotal() {
-        // Lógica de cálculo (ej. presupuesto - 10% de margen)
-        return this.presupuesto * 0.90;
+        return presupuesto * 0.90;
     }
 
-    // Implementación del método de la Interface
     @Override
     public void ejecutarServicio() {
-        System.out.println("Iniciando campaña '" + nombre + "' para " + clienteAsignado.getEmpresa());
-        System.out.println("Duración estimada: 30 días.");
+        System.out.println("Ejecutando campaña '" + nombre + "' para " + clienteAsignado.getEmpresa());
     }
 
     @Override
     public String toString() {
-        return "Campaña{" +
-                "Código='" + codigo + '\'' +
+        return "Campana{" +
+                "Codigo='" + codigo + '\'' +
                 ", Nombre='" + nombre + '\'' +
                 ", Presupuesto=" + presupuesto +
                 ", Cliente=" + clienteAsignado.getEmpresa() +
                 '}';
     }
 
-    // Getters y Setters
     public String getCodigo() { return codigo; }
-    public double getPresupuesto() { // <--- GETTER
-        return presupuesto;
-    }
 
-    public void setPresupuesto(double presupuesto) { // <--- SETTER
+    public double getPresupuesto() { return presupuesto; }
+
+    public void setPresupuesto(double presupuesto) {
+        if (presupuesto <= 0)
+            throw new IllegalArgumentException("El presupuesto debe ser mayor a 0");
         this.presupuesto = presupuesto;
     }
-
 }

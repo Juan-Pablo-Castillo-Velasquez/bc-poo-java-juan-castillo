@@ -8,71 +8,68 @@ import com.CreatividadDigital.excepciones.PresupuestoInvalidoException;
 
 import java.util.*;
 
-// Requisitos: Colecciones (List y Map) y Lógica CRUD
+
+
+
+
 public class GestionAgencia {
 
-    private Map<String, Cliente> clientes;
-    public List<Persona> nomina;
-    public Map<String, CampanaPublicitaria> campañasActivas;
+    public final Map<String, Cliente> clientes;
+    public final List<Persona> nomina;
+    public final Map<String, CampanaPublicitaria> campanasActivas;
 
     public GestionAgencia() {
-        // Inicialización de colecciones con Generics
-        this.clientes = new HashMap<>();
-        this.nomina = new ArrayList<>();
-        this.campañasActivas = new HashMap<>();
+        clientes = new HashMap<>();
+        nomina = new ArrayList<>();
+        campanasActivas = new HashMap<>();
     }
-
 
     public void agregarCliente(Cliente c) {
         if (!clientes.containsKey(c.getId())) {
             clientes.put(c.getId(), c);
-            nomina.add(c); // Agregamos a la lista polimórfica
-            System.out.println(" Cliente " + c.getNombre() + " agregado con éxito.");
+            nomina.add(c);
+            System.out.println("Cliente agregado: " + c.getNombre());
         } else {
-            System.out.println("️ Error: El cliente con ID " + c.getId() + " ya existe.");
+            System.out.println("El cliente con ID " + c.getId() + " ya existe.");
         }
     }
 
+    public void agregarCampana(CampanaPublicitaria camp) {
+        campanasActivas.put(camp.getCodigo(), camp);
+        System.out.println("Campaña agregada exitosamente.");
+    }
 
     public void listarNominaCompleta() {
-        System.out.println("\n--- LISTADO COMPLETO DE PERSONAS ---");
+        System.out.println("\n--- LISTA COMPLETA ---");
         for (Persona p : nomina) {
-            System.out.println(p.toString());
-            p.mostrarRol(); // Uso del método polimórfico
-            System.out.println("------------------------------------");
+            System.out.println(p);
+            p.mostrarRol();
+            System.out.println("-----------------------");
         }
     }
 
-    public CampanaPublicitaria buscarCampanaPorCodigo(String codigo) throws CampanaNoEncontradaException {
-        // Uso de Map para buscar (más rápido)
-        if (campañasActivas.containsKey(codigo)) {
-            return campañasActivas.get(codigo);
-        } else {
-            // Requisito: Lanzar Excepción Personalizada
-            throw new CampanaNoEncontradaException("La campaña con código " + codigo + " no fue encontrada.");
-        }
-    }
+    public CampanaPublicitaria buscarCampanaPorCodigo(String codigo)
+            throws CampanaNoEncontradaException {
 
+        CampanaPublicitaria camp = campanasActivas.get(codigo);
+        if (camp == null)
+            throw new CampanaNoEncontradaException("No existe la campaña: " + codigo);
+
+        return camp;
+    }
 
     public void modificarPresupuestoCampana(String codigo, double nuevoPresupuesto) {
-        try { // Requisito: Try-Catch implementado
+        try {
             CampanaPublicitaria campana = buscarCampanaPorCodigo(codigo);
 
-            // Lanza una RuntimeException si el presupuesto es inválido
-            if (nuevoPresupuesto < 0) {
-                throw new PresupuestoInvalidoException("El presupuesto no puede ser negativo: " + nuevoPresupuesto);
-            }
+            if (nuevoPresupuesto <= 0)
+                throw new PresupuestoInvalidoException("Presupuesto inválido: " + nuevoPresupuesto);
 
             campana.setPresupuesto(nuevoPresupuesto);
-            System.out.println(" Presupuesto de campaña " + codigo + " actualizado a $" + nuevoPresupuesto);
+            System.out.println("Presupuesto actualizado.");
 
-        } catch (CampanaNoEncontradaException e) {
-            // Manejo de la excepción personalizada
-            System.err.println(" Error de Operación: " + e.getMessage());
-        } catch (PresupuestoInvalidoException e) {
-            // Manejo de la excepción de Runtime
-            System.err.println(" Error de Validación: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
         }
     }
-
 }
