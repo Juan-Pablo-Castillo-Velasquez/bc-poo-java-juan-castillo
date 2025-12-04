@@ -1,4 +1,4 @@
-package com.CreatividadDigital.App;
+package com.CreatividadDigital;
 
 
 
@@ -15,7 +15,6 @@ public class Main {
     private static final GestionAgencia agencia = new GestionAgencia();
 
     public static void main(String[] args) {
-        // Inicialización de datos de prueba para demostrar Herencia y Polimorfismo
         inicializarDatos();
 
         int opcion;
